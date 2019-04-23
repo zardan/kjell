@@ -44,12 +44,17 @@ jobs:
       - run:
           name: Obtaining Playground UI & Mellis version
           command: |
+            shopt -s globstar
+            
             # Get versions
-            PLAYGROUND_UI_VERSION="$($SCRIPTS/get_ui_version.sh ~/repo)"
+            PLAYGROUND_KJELL_VERSION="$($SCRIPTS/get_attr_version.sh ~/project/Assets/**/KjellUIAssemblyInfo.cs)"
+            echo ">>> Using Playground Kjell v$PLAYGROUND_KJELL_VERSION"
+
+            PLAYGROUND_UI_VERSION="$($SCRIPTS/get_attr_version.sh ~/repo/Library/PackageCache/se.zifro.ui*/**/ZifroPlaygroundUIAssemblyInfo.cs)"
             echo ">>> Using Playground UI v$PLAYGROUND_UI_VERSION"
 
-            MELLIS_VERSION="$($SCRIPTS/get_dll_version.sh ~/repo/Library/PackageCache/se.zifro.mellis*/Plugins/se.zifro.mellis/Mellis.dll)"
-            MELLIS_PYTHON3_VERSION="$($SCRIPTS/get_dll_version.sh ~/repo/Library/PackageCache/se.zifro.mellis*/Plugins/se.zifro.mellis.python3/Mellis.Lang.Python3.dll)"
+            MELLIS_VERSION="$($SCRIPTS/get_dll_version.sh ~/project/Library/PackageCache/se.zifro.mellis*/**/Mellis.dll)"
+            MELLIS_PYTHON3_VERSION="$($SCRIPTS/get_dll_version.sh ~/project/Library/PackageCache/se.zifro.mellis*/**/Mellis.Lang.Python3.dll)"
             echo ">>> Using Mellis v$MELLIS_VERSION, and Python3 module v$MELLIS_PYTHON3_VERSION"
 
             # Save to environment
@@ -120,7 +125,7 @@ jobs:
           name: Obtaining Playground UI version
           command: |
             # Get versions
-            PLAYGROUND_UI_VERSION="$($SCRIPTS/get_ui_version.sh ~/repo)"
+            PLAYGROUND_UI_VERSION="$($SCRIP)"
             echo ">>> Using Playground UI v$PLAYGROUND_UI_VERSION"
 
             # Save to environment

@@ -1,9 +1,6 @@
 #!/bin/bash
 
-PROJECT=${1?Project path}
-
-# Gather Playground UI version
-assemblyInfoPath="$(find "$PROJECT" -name ZifroPlaygroundUIAssemblyInfo.cs)"
+assemblyInfoPath=${1?AssemblyInfo.cs file path}
 
 if ! [ -f "$assemblyInfoPath" ]
 then

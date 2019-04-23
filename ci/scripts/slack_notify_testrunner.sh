@@ -15,6 +15,7 @@ TEST_TOTAL=$((TEST_PASSED+TEST_FAILED+TEST_SKIPPED+TEST_INCONCLUSIVE))
 : ${TEST_ERRORS:=}
 : ${BUILD_STATUS:="fail"}
 
+: ${PLAYGROUND_KJELL_VERSION:=}
 : ${PLAYGROUND_UI_VERSION:=}
 : ${MELLIS_VERSION:=}
 : ${MELLIS_PYTHON3_VERSION:=}
@@ -197,6 +198,11 @@ then
     fi
 fi
 
+if [[ "$PLAYGROUND_KJELL_VERSION" ]]; then
+    kjellFieldText="*$(escapeJson "$PLAYGROUND_KJELL_VERSION")*"
+else
+    kjellFieldText="_(unknown version)_"
+fi
 if [[ "$PLAYGROUND_UI_VERSION" ]]; then
     uiFieldText="*$(escapeJson "$PLAYGROUND_UI_VERSION")*"
 else
@@ -221,7 +227,7 @@ fields="
 },
 {
     \"title\": \"Versions\",
-    \"value\": \"Zifro Playground UI: $uiFieldText\\nMellis: $mellisFieldText\\nPython3 module: $python3FieldText\",
+    \"value\": \"Playground Kjell UI: $kjellFieldText\\nPlayground UI: $uiFieldText\\nMellis: $mellisFieldText\\nPython3 module: $python3FieldText\",
     \"short\": true
 }"
 
