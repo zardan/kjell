@@ -96,7 +96,7 @@ public class CaseCorrection : MonoBehaviour, IPMCaseSwitched, IPMTimeToCorrectCa
 
 		if (number < 1)
 		{
-			throw new ArgumentOutOfRangeException("number", "Argument must be greater than 0");
+			throw new ArgumentOutOfRangeException(nameof(number), "Argument must be greater than 0");
 		}
 
 		if (number < 20)
@@ -150,7 +150,7 @@ public class CaseCorrection : MonoBehaviour, IPMCaseSwitched, IPMTimeToCorrectCa
 
 			if (outputs == null || outputs.Count == 0)
 			{
-				throw new Exception("There is a test defined but no output defined.");
+				throw new InvalidOperationException("There is a test defined but no output defined.");
 			}
 		}
 		else
