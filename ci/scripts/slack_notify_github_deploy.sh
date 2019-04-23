@@ -2,10 +2,8 @@
 
 : ${SLACK_WEBHOOK?}
 
-: ${PLAYGROUND_UI_VERSION?}
-
 : ${DEPLOY_STATUS:="fail"}
-: ${DEPLOY_TAG_PLAYGROUND_UI:=}
+: ${DEPLOY_TAG_KJELL:=}
 : ${DEPLOY_CHANGESET:=}
 : ${BUILD_STATUS:="fail"}
 
@@ -33,7 +31,7 @@ then
         color="#1CBF43" # green
         visitJobActionStyle="primary" # green
         title=":tada: DEPLOYED TO GITHUB"
-        fallback="Deployed to GitHub successfully, new tag: $DEPLOY_TAG_PLAYGROUND_UI"
+        fallback="Deployed to GitHub successfully, new tag: $DEPLOY_TAG_KJELL"
         actions=",
             {
                 \"type\": \"button\",
@@ -41,15 +39,15 @@ then
                 \"url\": \"https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME/releases/tag/$DEPLOY_TAG_COMBINED\"
             }
         "
-        if [[ "$DEPLOY_TAG_PLAYGROUND_UI" ]]; then
-            echo "Recording new ui tag: '$DEPLOY_TAG_PLAYGROUND_UI'"
-            uiTagText="_(tag: <https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME/releases/tag/$DEPLOY_TAG_PLAYGROUND_UI|$DEPLOY_TAG_PLAYGROUND_UI>)_"
+        if [[ "$DEPLOY_TAG_KJELL" ]]; then
+            echo "Recording new ui tag: '$DEPLOY_TAG_KJELL'"
+            uiTagText="_(tag: <https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME/releases/tag/$DEPLOY_TAG_KJELL|$DEPLOY_TAG_KJELL>)_"
         else
             uiTagText="_(no new tag)_"
         fi
         fields="{
-                \"title\": \"Zifro Playground UI\",
-                \"value\": \"\`\`\`$DEPLOY_TAG_PLAYGROUND_UI\`\`\`\\n$uiTagText\",
+                \"title\": \"Zifro Kjell UI\",
+                \"value\": \"\`\`\`$DEPLOY_TAG_KJELL\`\`\`\\n$uiTagText\",
                 \"short\": true
             }"
 

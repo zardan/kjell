@@ -7,7 +7,7 @@ set -o pipefail
 
 repo=${1?Local repo folder required.}
 deploy=${2?Local deployment folder required.}
-: ${PLAYGROUND_UI_VERSION?}
+: ${PLAYGROUND_KJELL_VERSION?}
 : ${CIRCLE_REPOSITORY_URL?}
 : ${CIRCLE_BUILD_URL?}
 : ${CIRCLE_PROJECT_USERNAME?}
@@ -33,7 +33,7 @@ fi
 git add . -v
 echo
 set +e
-git commit -m ":heavy_check_mark: [CircleCI] Playground UI v$PLAYGROUND_UI_VERSION
+git commit -m ":heavy_check_mark: [CircleCI] Kjell UI v$PLAYGROUND_KJELL_VERSION
 This commit was created autonomously by a script in the CircleCI workflow.
 
 Latest commit:
@@ -93,7 +93,7 @@ echo ">>> Tagging"
 set +e
 TAG_COUNT=$((0))
 
-tagMessage="Playground UI v$PLAYGROUND_UI_VERSION
+tagMessage="Kjell UI v$PLAYGROUND_KJELL_VERSION
 This tag was created autonomously by a script in the CircleCI workflow.
 
 Latest commit:
@@ -102,11 +102,11 @@ $latestCommit
 :shipit: $CIRCLE_BUILD_URL
 :octocat: https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME/commit/$CIRCLE_SHA1"
 
-tag "v$PLAYGROUND_UI_VERSION" "$tagMessage"
+tag "v$PLAYGROUND_KJELL_VERSION" "$tagMessage"
 TAG_STATUS=$?
 if [ $TAG_STATUS -eq 0 ]; then
     ((TAG_COUNT++))
-    echo "export DEPLOY_TAG_PLAYGROUND_UI='v$PLAYGROUND_UI_VERSION'" >> $BASH_ENV
+    echo "export DEPLOY_TAG_KJELL='v$PLAYGROUND_KJELL_VERSION'" >> $BASH_ENV
 fi
 
 set -e

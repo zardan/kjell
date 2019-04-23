@@ -125,20 +125,22 @@ jobs:
       - run:
           name: Obtaining Playground UI version
           command: |
+            shopt -s globstar
+
             # Get versions
-            PLAYGROUND_UI_VERSION="$($SCRIP)"
-            echo ">>> Using Playground UI v$PLAYGROUND_UI_VERSION"
+            PLAYGROUND_KJELL_VERSION="$($SCRIPTS/get_attr_version.sh ~/repo/Assets/**/KjellUIAssemblyInfo.cs)"
+            echo ">>> Using Playground Kjell UI v$PLAYGROUND_KJELL_VERSION"
 
             # Save to environment
-            echo "PLAYGROUND_UI_VERSION='$PLAYGROUND_UI_VERSION'" >> $BASH_ENV
+            echo "PLAYGROUND_KJELL_VERSION='$PLAYGROUND_KJELL_VERSION'" >> $BASH_ENV
 
       - run:
           name: Prepare files for deployment
           command: |
-            : ${PLAYGROUND_UI_VERSION?}
+            : ${PLAYGROUND_KJELL_VERSION?}
 
-            echo ">>> Update version package.json to '$PLAYGROUND_UI_VERSION'"
-            echo "$(jq ".version=\"$PLAYGROUND_UI_VERSION\"" ~/upm/package.json)" > ~/upm/package.json
+            echo ">>> Update version package.json to '$PLAYGROUND_KJELL_VERSION'"
+            echo "$(jq ".version=\"$PLAYGROUND_KJELL_VERSION\"" ~/upm/package.json)" > ~/upm/package.json
             echo
 
             $SCRIPTS/move_upm_files.sh ~/repo ~/upm
