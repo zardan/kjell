@@ -24,11 +24,13 @@ public class CaseCorrection : MonoBehaviour, IPMCaseSwitched, IPMTimeToCorrectCa
 		if (hasTestDefined && PMWrapper.levelMode == LevelMode.Case)
 		{
 			if (inputs == null || inputs.Count == 0)
+			{
 				PMWrapper.RaiseTaskError("Jag förväntade mig inga inmatningar, så nu vet jag inte vad jag ska mata in.");
-
+			}
 			else if (inputIndex > inputs.Count - 1)
+			{
 				PMWrapper.RaiseTaskError("För många inmatningar. Jag förväntade mig bara " + inputs.Count + " inmatningar.");
-
+			}
 			else
 			{
 				var nextInput = inputs[inputIndex];
@@ -43,10 +45,13 @@ public class CaseCorrection : MonoBehaviour, IPMCaseSwitched, IPMTimeToCorrectCa
 		if (hasTestDefined)
 		{
 			if (outputIndex > outputs.Count - 1)
+			{
 				errorMessage = "För många utskrifter. Jag förväntade mig bara " + outputs.Count + " utskrifter.";
-
+			}
 			else if (output != outputs[outputIndex] && string.IsNullOrEmpty(errorMessage))
+			{
 				errorMessage = "Fel i den " + StringifyNumber(outputIndex + 1) + " utskriften. Programmet skrev ut <b>" + output + "</b> men jag förväntade mig <b>" + outputs[outputIndex] + "</b>.";
+			}
 
 			outputIndex++;
 		}
@@ -90,27 +95,42 @@ public class CaseCorrection : MonoBehaviour, IPMCaseSwitched, IPMTimeToCorrectCa
 		var tensEnd = "nde";
 
 		if (number < 1)
+		{
 			throw new ArgumentOutOfRangeException("number", "Argument must be greater than 0");
+		}
 
 		if (number < 20)
+		{
 			return First20[number - 1];
+		}
+
 		if (number < 100)
 		{
 			if (number % 10 == 0)
+			{
 				return tensStart[number / 10 - 2] + tensEnd;
+			}
 			else
+			{
 				return tensStart[number / 10 - 2] + First20[number % 10 - 1];
+			}
 		}
 		else
+		{
 			return number.ToString();
+		}
 	}
 
 	private static void CheckTooFewInputs()
 	{
 		if (inputs != null && inputIndex < inputs.Count)
+		{
 			errorMessage = "För få inmatningar. Jag förväntade mig " + inputs.Count + " inmatningar.";
+		}
 		else if (outputs != null && outputIndex < outputs.Count)
+		{
 			errorMessage = "För få utskrifter. Jag förväntade mig " + outputs.Count + " utskrifter.";
+		}
 	}
 
 	public void OnPMCaseSwitched(int caseNumber)
@@ -133,7 +153,9 @@ public class CaseCorrection : MonoBehaviour, IPMCaseSwitched, IPMTimeToCorrectCa
             outputs = caseDefinition.test.output;
 
 			if (outputs == null || outputs.Count == 0)
+			{
 				throw new Exception("There is a test defined but no output defined.");
+			}
 		}
 		else
 		{
@@ -150,9 +172,13 @@ public class CaseCorrection : MonoBehaviour, IPMCaseSwitched, IPMTimeToCorrectCa
 		CheckTooFewInputs();
 
 		if (!string.IsNullOrEmpty(errorMessage))
+		{
 			PMWrapper.RaiseTaskError(errorMessage);
+		}
 		else
+		{
 			PMWrapper.SetCaseCompleted();
+		}
 	}
 
 	public void OnPMCompilerStarted()

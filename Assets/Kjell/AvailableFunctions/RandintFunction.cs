@@ -16,13 +16,19 @@ public class RandintFunction : ClrFunction
 		}
 
 		if (!arguments[0].TryConvert(out int start))
+		{
 			PMWrapper.RaiseError("Fel datatyp. Parametrarna till randint får bara vara heltal.");
+		}
 
 		if (!arguments[1].TryConvert(out int end))
+		{
 			PMWrapper.RaiseError("Fel datatyp. Parametrarna till randint får bara vara heltal.");
+		}
 
 		if (start > end)
+		{
 			PMWrapper.RaiseError("Fel i parametrarna till randint. Första parametern ska vara mindre än den andra");
+		}
 
 		int randomNumber = Random.Range(start, end + 1);
 

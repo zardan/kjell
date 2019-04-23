@@ -21,7 +21,9 @@ namespace Kjell
 			if (Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetKeyDown(KeyCode.Return))
 			{
 				if(!hasBeenSubmitted)
+				{
 					SubmitInput();
+				}
 			}
 		}
 
@@ -30,9 +32,11 @@ namespace Kjell
 			hasBeenSubmitted = true;
 
 			if (!string.IsNullOrEmpty(InputField.text))
+			{
 				SubmittedText.text = InputField.text;
+			}
 
-            InputFieldBase.SetActive(false);
+			InputFieldBase.SetActive(false);
             SendButton.SetActive(false);
             SubmittedText.gameObject.SetActive(true);
 
@@ -59,7 +63,9 @@ namespace Kjell
 		public void DeactivateInputValue()
 		{
 			if (!string.IsNullOrEmpty(InputField.text))
+			{
 				SubmittedText.text = InputField.text;
+			}
 
 			InputFieldBase.SetActive(false);
 			SendButton.SetActive(false);

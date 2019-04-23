@@ -31,7 +31,9 @@ namespace Kjell
 		private void Start()
 		{
 			if (Instance == null)
+			{
 				Instance = this;
+			}
 		}
 
 		public void Print(string message)
@@ -69,7 +71,9 @@ namespace Kjell
 			LatestReadInput = submitedText;
 
 			if (labelObject != null)
+			{
 				labelObject.GetComponent<InputLabel>().BubbleImage.sprite = InputLabelPlain;
+			}
 
 			valueObject.GetComponent<InputValue>().BubbleImage.sprite = InputValuePlain;
 			
@@ -90,7 +94,9 @@ namespace Kjell
 			{
 				var inputValue = gameObject.transform.GetChild(gameObject.transform.childCount - 1).gameObject.GetComponent<InputValue>();
 				if (inputValue != null)
+				{
 					inputValue.DeactivateInputValue();
+				}
 			}
 		}
 

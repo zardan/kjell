@@ -18,14 +18,22 @@ public class PrintFunction : ClrFunction
 		foreach (IScriptType arg in arguments)
 		{
 			if (builder.Length > 0)
+			{
 				builder.Append(' ');
+			}
 
 			if (arg.TryConvert(out string s))
+			{
 				builder.Append(s);
+			}
 			else if (arg.TryConvert(out double d))
+			{
 				builder.Append(d.ToString(CultureInfo.InvariantCulture));
+			}
 			else if (arg.TryConvert(out bool b))
+			{
 				builder.Append(b);
+			}
 		}
 
 		IOStream.Instance.Print(builder.ToString());
