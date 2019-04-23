@@ -40,9 +40,9 @@ namespace Kjell
 		{
 			CaseCorrection.NextOutput(message);
 
-			var outputObject = Instantiate(PrintPrefab);
+			GameObject outputObject = Instantiate(PrintPrefab);
 			outputObject.transform.SetParent(gameObject.transform, false);
-			var output = outputObject.GetComponent<Output>();
+			Output output = outputObject.GetComponent<Output>();
 			message = message.Replace("\\n", "\n");
 			output.Text.text = message;
 			outputObject.GetComponent<Container>().SetWidth(message.Length);
@@ -92,7 +92,7 @@ namespace Kjell
 		{
 			if (gameObject.transform.childCount > 0)
 			{
-				var inputValue = gameObject.transform.GetChild(gameObject.transform.childCount - 1).gameObject.GetComponent<InputValue>();
+				InputValue inputValue = gameObject.transform.GetChild(gameObject.transform.childCount - 1).gameObject.GetComponent<InputValue>();
 				if (inputValue != null)
 				{
 					inputValue.DeactivateInputValue();

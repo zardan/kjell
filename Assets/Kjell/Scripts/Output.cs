@@ -14,7 +14,7 @@ namespace Kjell
             // Change the transparency of the output message (0 is transparent, 1 is opaque)
             if (Text.text == "")
             {
-                var tempColor = Image.color;
+				Color tempColor = Image.color;
                 tempColor.a = Opacity; 
                 Image.color = tempColor;
             }

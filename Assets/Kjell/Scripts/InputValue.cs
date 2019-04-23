@@ -47,7 +47,7 @@ namespace Kjell
 
 		public IEnumerator StartInputAnimation(string message)
 		{
-			foreach (var character in message)
+			foreach (char character in message)
 			{
 				InputField.text += character;
 				InputField.caretPosition = message.Length;

@@ -33,7 +33,7 @@ public class CaseCorrection : MonoBehaviour, IPMCaseSwitched, IPMTimeToCorrectCa
 			}
 			else
 			{
-				var nextInput = inputs[inputIndex];
+				string nextInput = inputs[inputIndex];
 				IOStream.Instance.StartCoroutine(inputValueObject.GetComponent<InputValue>().StartInputAnimation(nextInput));
 				inputIndex++;
 			}
@@ -92,7 +92,7 @@ public class CaseCorrection : MonoBehaviour, IPMCaseSwitched, IPMTimeToCorrectCa
 			"åttio",
 			"nittio"
 		};
-		var tensEnd = "nde";
+		string tensEnd = "nde";
 
 		if (number < 1)
 		{
