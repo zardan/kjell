@@ -227,7 +227,7 @@ fields="
 },
 {
     \"title\": \"Versions\",
-    \"value\": \"Playground Kjell UI: $kjellFieldText\\nPlayground UI: $uiFieldText\\nMellis: $mellisFieldText\\nPython3 module: $python3FieldText\",
+    \"value\": \"Kjell UI: $kjellFieldText\\nPlayground UI: $uiFieldText\\nMellis: $mellisFieldText\\nPython3 module: $python3FieldText\",
     \"short\": true
 }"
 

@@ -48,7 +48,7 @@ jobs:
             
             # Get versions
             PLAYGROUND_KJELL_VERSION="$($SCRIPTS/get_attr_version.sh ~/repo/Assets/**/KjellUIAssemblyInfo.cs)"
-            echo ">>> Using Playground Kjell v$PLAYGROUND_KJELL_VERSION"
+            echo ">>> Using Playground Kjell UI v$PLAYGROUND_KJELL_VERSION"
 
             PLAYGROUND_UI_VERSION="$($SCRIPTS/get_attr_version.sh ~/repo/Library/PackageCache/se.zifro.ui*/**/ZifroPlaygroundUIAssemblyInfo.cs)"
             echo ">>> Using Playground UI v$PLAYGROUND_UI_VERSION"
