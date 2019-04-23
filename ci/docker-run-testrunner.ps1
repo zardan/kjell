@@ -41,8 +41,8 @@ docker run -it --rm `
     -e "UNITY_PASSWORD=$($UnityID.GetNetworkCredential().Password)" `
     -e "UNITY_LICENSE_CONTENT_B64=$UnityLicenseB64" `
     -e "TEST_PLATFORM=linux" `
-    -e "WORKDIR=/root/project" `
-    -v "$(Get-Location):/root/project"`
+    -e "WORKDIR=/root/repo" `
+    -v "$(Get-Location):/root/repo" `
     $DockerImage `
     '/bin/bash'
 

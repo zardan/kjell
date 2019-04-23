@@ -43,5 +43,9 @@ ${UNITY_EXECUTABLE:-xvfb-run -as '-screen 0 640x480x24' /opt/Unity/Editor/Unity}
         -quit \
         -logfile
 
+EXIT_STATUS=$?
+
 echo
 echo ">>>>>> Compilation finished successfully"
+
+exit $EXIT_STATUS
