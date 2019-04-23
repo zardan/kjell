@@ -110,15 +110,11 @@ public class CaseCorrection : MonoBehaviour, IPMCaseSwitched, IPMTimeToCorrectCa
 			{
 				return tensStart[number / 10 - 2] + tensEnd;
 			}
-			else
-			{
-				return tensStart[number / 10 - 2] + first20[number % 10 - 1];
-			}
+
+			return tensStart[number / 10 - 2] + first20[number % 10 - 1];
 		}
-		else
-		{
-			return number.ToString();
-		}
+
+		return number.ToString();
 	}
 
 	private static void CheckTooFewInputs()
