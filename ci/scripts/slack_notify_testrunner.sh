@@ -218,7 +218,12 @@ if [[ "$MELLIS_PYTHON3_VERSION" ]]; then
 else
     python3FieldText="_(unknown version)_"
 fi
-testPercent=$((100*TEST_PASSED/TEST_TOTAL))
+
+if [[ $TEST_TOTAL > 0 ]]; then
+    testPercent=$((100*TEST_PASSED/TEST_TOTAL))
+else
+    testPercent=$((0))
+fi
 fields="
 {
     \"title\": \"Test results: $testPercent %\",

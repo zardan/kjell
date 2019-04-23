@@ -58,6 +58,7 @@ jobs:
             echo ">>> Using Mellis v$MELLIS_VERSION, and Python3 module v$MELLIS_PYTHON3_VERSION"
 
             # Save to environment
+            echo "PLAYGROUND_KJELL_VERSION='$PLAYGROUND_KJELL_VERSION'" >> $BASH_ENV
             echo "PLAYGROUND_UI_VERSION='$PLAYGROUND_UI_VERSION'" >> $BASH_ENV
             echo "MELLIS_VERSION='$MELLIS_VERSION'" >> $BASH_ENV
             echo "MELLIS_PYTHON3_VERSION='$MELLIS_PYTHON3_VERSION'" >> $BASH_ENV
