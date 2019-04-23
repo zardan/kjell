@@ -15,5 +15,6 @@ echo
 
 # Copy over files
 echo ">>> Move Playground UI assets"
+mkdir -pv $upm/se.zifro.kjell/
 cp -rv $PROJECT/Assets/Kjell/* $upm/se.zifro.kjell/
 echo
