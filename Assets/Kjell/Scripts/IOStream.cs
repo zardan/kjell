@@ -50,8 +50,7 @@ namespace Kjell
 		{
 			CaseCorrection.NextOutput(message);
 
-			GameObject outputObject = Instantiate(printPrefab);
-			outputObject.transform.SetParent(gameObject.transform, false);
+			GameObject outputObject = Instantiate(printPrefab, gameObject.transform, false);
 			Output output = outputObject.GetComponent<Output>();
 			message = message.Replace("\\n", "\n");
 			output.text.text = message;
@@ -60,16 +59,14 @@ namespace Kjell
 
 		public IEnumerator TriggerInput(string message)
 		{
-			labelObject = Instantiate(labelPrefab);
-			labelObject.transform.SetParent(gameObject.transform, false);
+			labelObject = Instantiate(labelPrefab, gameObject.transform, false);
 			labelObject.GetComponent<InputLabel>().text.text = message;
 			labelObject.GetComponent<InputLabel>().bubbleImage.sprite = inputLabelPop;
 			labelObject.GetComponent<Container>().SetWidth(message.Length);
 
 			yield return new WaitForSeconds(2 * (1 - PMWrapper.speedMultiplier));
 			
-			valueObject = Instantiate(valuePrefab);
-			valueObject.transform.SetParent(gameObject.transform, false);
+			valueObject = Instantiate(valuePrefab, gameObject.transform, false);
 			valueObject.GetComponent<InputValue>().bubbleImage.sprite = inputValuePop;
 			valueObject.GetComponent<InputValue>().inputFieldBase.GetComponent<InputField>().Select();
 
