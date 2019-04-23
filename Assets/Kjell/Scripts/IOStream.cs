@@ -97,9 +97,9 @@ namespace Kjell
 			StartCoroutine(CaseCorrection.NextInput(valueObject));
 		}
 
-		public void InputSubmitted(string submitedText)
+		public void InputSubmitted(string submittedText)
 		{
-			latestReadInput = submitedText;
+			latestReadInput = submittedText;
 
 			if (labelObject != null)
 			{
@@ -108,7 +108,7 @@ namespace Kjell
 
 			valueObject.GetComponent<InputValue>().bubbleImage.sprite = inputValuePlain;
 
-			PMWrapper.ResolveYield(submitedText);
+			PMWrapper.ResolveYield(submittedText);
 		}
 
 		void Start()
