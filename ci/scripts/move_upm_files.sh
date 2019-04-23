@@ -10,10 +10,10 @@ upm=${2?UPM (output) folder required.}
 
 # Remove old files in upm/se.zifro.ui
 echo ">>> Remove old files"
-rm -rfv $upm/se.zifro.ui/*
+rm -rfv $upm/se.zifro.kjell/*
 echo
 
 # Copy over files
 echo ">>> Move Playground UI assets"
-cp -rv $PROJECT/Assets/Zifro\ Playground\ UI/* $upm/se.zifro.ui/
+cp -rv $PROJECT/Assets/Kjell/* $upm/se.zifro.kjell/
 echo
