@@ -1,43 +1,45 @@
 ﻿using System.Globalization;
 using System.Linq;
 using System.Text;
-using Kjell;
 using Mellis;
 using Mellis.Core.Interfaces;
 
-public class PrintFunction : ClrFunction
+namespace Kjell.AvailableFunctions
 {
-	public PrintFunction() : base("print")
+	public class PrintFunction : ClrFunction
 	{
-	}
-
-	public override IScriptType Invoke(params IScriptType[] arguments)
-	{
-		var builder = new StringBuilder();
-
-		foreach (IScriptType arg in arguments)
+		public PrintFunction() : base("print")
 		{
-			if (builder.Length > 0)
-			{
-				builder.Append(' ');
-			}
-
-			if (arg.TryConvert(out string s))
-			{
-				builder.Append(s);
-			}
-			else if (arg.TryConvert(out double d))
-			{
-				builder.Append(d.ToString(CultureInfo.InvariantCulture));
-			}
-			else if (arg.TryConvert(out bool b))
-			{
-				builder.Append(b);
-			}
 		}
 
-		IOStream.instance.Print(builder.ToString());
+		public override IScriptType Invoke(params IScriptType[] arguments)
+		{
+			var builder = new StringBuilder();
 
-		return null;
+			foreach (IScriptType arg in arguments)
+			{
+				if (builder.Length > 0)
+				{
+					builder.Append(' ');
+				}
+
+				if (arg.TryConvert(out string s))
+				{
+					builder.Append(s);
+				}
+				else if (arg.TryConvert(out double d))
+				{
+					builder.Append(d.ToString(CultureInfo.InvariantCulture));
+				}
+				else if (arg.TryConvert(out bool b))
+				{
+					builder.Append(b);
+				}
+			}
+
+			IOStream.instance.Print(builder.ToString());
+
+			return null;
+		}
 	}
 }
