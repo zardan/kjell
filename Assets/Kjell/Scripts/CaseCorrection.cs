@@ -59,8 +59,7 @@ public class CaseCorrection : MonoBehaviour, IPMCaseSwitched, IPMTimeToCorrectCa
 
 	private static string StringifyNumber(int number)
 	{
-		var first20 = new List<string>()
-		{
+		var first20 = new List<string> {
 			"första",
 			"andra",
 			"tredje",
@@ -81,8 +80,7 @@ public class CaseCorrection : MonoBehaviour, IPMCaseSwitched, IPMTimeToCorrectCa
 			"artonde",
 			"nittonde"
 		};
-		var tensStart = new List<string>()
-		{
+		var tensStart = new List<string> {
 			"tjugo",
 			"trettio",
 			"fyrtio",
@@ -92,7 +90,7 @@ public class CaseCorrection : MonoBehaviour, IPMCaseSwitched, IPMTimeToCorrectCa
 			"åttio",
 			"nittio"
 		};
-		string tensEnd = "nde";
+		const string tensEnd = "nde";
 
 		if (number < 1)
 		{
