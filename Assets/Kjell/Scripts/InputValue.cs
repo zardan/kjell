@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Kjell
@@ -7,14 +8,19 @@ namespace Kjell
 	public class InputValue : MonoBehaviour
 	{
 		private bool hasBeenSubmitted;
-		public Text SubmittedText;
+		[FormerlySerializedAs("SubmittedText")]
+		public Text submittedText;
 
-		public InputField InputField;
+		[FormerlySerializedAs("InputField")]
+		public InputField inputField;
 
-		public GameObject InputFieldBase;
-		public GameObject SendButton;
+		[FormerlySerializedAs("InputFieldBase")]
+		public GameObject inputFieldBase;
+		[FormerlySerializedAs("SendButton")]
+		public GameObject sendButton;
 
-		public Image BubbleImage;
+		[FormerlySerializedAs("BubbleImage")]
+		public Image bubbleImage;
 
 		private void Update()
 		{
@@ -31,26 +37,26 @@ namespace Kjell
 		{
 			hasBeenSubmitted = true;
 
-			if (!string.IsNullOrEmpty(InputField.text))
+			if (!string.IsNullOrEmpty(inputField.text))
 			{
-				SubmittedText.text = InputField.text;
+				submittedText.text = inputField.text;
 			}
 
-			InputFieldBase.SetActive(false);
-            SendButton.SetActive(false);
-            SubmittedText.gameObject.SetActive(true);
+			inputFieldBase.SetActive(false);
+            sendButton.SetActive(false);
+            submittedText.gameObject.SetActive(true);
 
-			GetComponent<Container>().SetWidth(InputField.text.Length);
+			GetComponent<Container>().SetWidth(inputField.text.Length);
 
-            IOStream.Instance.InputSubmitted(SubmittedText.text);
+            IOStream.instance.InputSubmitted(submittedText.text);
         }
 
 		public IEnumerator StartInputAnimation(string message)
 		{
 			foreach (char character in message)
 			{
-				InputField.text += character;
-				InputField.caretPosition = message.Length;
+				inputField.text += character;
+				inputField.caretPosition = message.Length;
 
 				yield return new WaitForSeconds((1 - PMWrapper.speedMultiplier) * 0.4f);
 			}
@@ -62,14 +68,14 @@ namespace Kjell
 
 		public void DeactivateInputValue()
 		{
-			if (!string.IsNullOrEmpty(InputField.text))
+			if (!string.IsNullOrEmpty(inputField.text))
 			{
-				SubmittedText.text = InputField.text;
+				submittedText.text = inputField.text;
 			}
 
-			InputFieldBase.SetActive(false);
-			SendButton.SetActive(false);
-			SubmittedText.gameObject.SetActive(true);
+			inputFieldBase.SetActive(false);
+			sendButton.SetActive(false);
+			submittedText.gameObject.SetActive(true);
 		}
     }
 

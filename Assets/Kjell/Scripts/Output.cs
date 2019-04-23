@@ -1,22 +1,26 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Kjell
 {
 	public class Output : MonoBehaviour
 	{
-		public Text Text;
-        public Image Image;
-        public float Opacity;
+		[FormerlySerializedAs("Text")]
+		public Text text;
+        [FormerlySerializedAs("Image")]
+        public Image image;
+        [FormerlySerializedAs("Opacity")]
+        public float opacity;
 
         private void Start()
         {
             // Change the transparency of the output message (0 is transparent, 1 is opaque)
-            if (Text.text == "")
+            if (text.text == "")
             {
-				Color tempColor = Image.color;
-                tempColor.a = Opacity; 
-                Image.color = tempColor;
+				Color tempColor = image.color;
+                tempColor.a = opacity; 
+                image.color = tempColor;
             }
         }
 	}

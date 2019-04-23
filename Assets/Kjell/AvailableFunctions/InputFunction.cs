@@ -29,6 +29,6 @@ public class InputFunction : ClrYieldingFunction
 			}
 		}
 
-        IOStream.Instance.StartCoroutine(IOStream.Instance.TriggerInput(inputLabel));
+        IOStream.instance.StartCoroutine(IOStream.instance.TriggerInput(inputLabel));
     }
 }

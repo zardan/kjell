@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using PM;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 
@@ -10,29 +11,38 @@ namespace Kjell
 {
 	public class IOStream : MonoBehaviour, IPMCompilerStarted, IPMLevelChanged, IPMCompilerStopped, IPMCaseSwitched, IPMSwitchedToSandbox
 	{
-		public string LatestReadInput;
+		[FormerlySerializedAs("LatestReadInput")]
+		public string latestReadInput;
 
-		public GameObject PrintPrefab;
-		public GameObject LabelPrefab;
-		public GameObject ValuePrefab;
+		[FormerlySerializedAs("PrintPrefab")]
+		public GameObject printPrefab;
+		[FormerlySerializedAs("LabelPrefab")]
+		public GameObject labelPrefab;
+		[FormerlySerializedAs("ValuePrefab")]
+		public GameObject valuePrefab;
 
-		public Sprite InputLabelPop;
-		public Sprite InputValuePop;
-		public Sprite InputLabelPlain;
-		public Sprite InputValuePlain;
+		[FormerlySerializedAs("InputLabelPop")]
+		public Sprite inputLabelPop;
+		[FormerlySerializedAs("InputValuePop")]
+		public Sprite inputValuePop;
+		[FormerlySerializedAs("InputLabelPlain")]
+		public Sprite inputLabelPlain;
+		[FormerlySerializedAs("InputValuePlain")]
+		public Sprite inputValuePlain;
 
 		private GameObject labelObject;
 		private GameObject valueObject;
 
-		public Dictionary<int, string> LinesWithInput;
+		[FormerlySerializedAs("LinesWithInput")]
+		public Dictionary<int, string> linesWithInput;
 
-		public static IOStream Instance;
+		public static IOStream instance;
 
 		private void Start()
 		{
-			if (Instance == null)
+			if (instance == null)
 			{
-				Instance = this;
+				instance = this;
 			}
 		}
 
@@ -40,42 +50,42 @@ namespace Kjell
 		{
 			CaseCorrection.NextOutput(message);
 
-			GameObject outputObject = Instantiate(PrintPrefab);
+			GameObject outputObject = Instantiate(printPrefab);
 			outputObject.transform.SetParent(gameObject.transform, false);
 			Output output = outputObject.GetComponent<Output>();
 			message = message.Replace("\\n", "\n");
-			output.Text.text = message;
+			output.text.text = message;
 			outputObject.GetComponent<Container>().SetWidth(message.Length);
 		}
 
 		public IEnumerator TriggerInput(string message)
 		{
-			labelObject = Instantiate(LabelPrefab);
+			labelObject = Instantiate(labelPrefab);
 			labelObject.transform.SetParent(gameObject.transform, false);
-			labelObject.GetComponent<InputLabel>().Text.text = message;
-			labelObject.GetComponent<InputLabel>().BubbleImage.sprite = InputLabelPop;
+			labelObject.GetComponent<InputLabel>().text.text = message;
+			labelObject.GetComponent<InputLabel>().bubbleImage.sprite = inputLabelPop;
 			labelObject.GetComponent<Container>().SetWidth(message.Length);
 
 			yield return new WaitForSeconds(2 * (1 - PMWrapper.speedMultiplier));
 			
-			valueObject = Instantiate(ValuePrefab);
+			valueObject = Instantiate(valuePrefab);
 			valueObject.transform.SetParent(gameObject.transform, false);
-			valueObject.GetComponent<InputValue>().BubbleImage.sprite = InputValuePop;
-			valueObject.GetComponent<InputValue>().InputFieldBase.GetComponent<InputField>().Select();
+			valueObject.GetComponent<InputValue>().bubbleImage.sprite = inputValuePop;
+			valueObject.GetComponent<InputValue>().inputFieldBase.GetComponent<InputField>().Select();
 
 			StartCoroutine(CaseCorrection.NextInput(valueObject));
 		}
 
 		public void InputSubmitted(string submitedText)
 		{
-			LatestReadInput = submitedText;
+			latestReadInput = submitedText;
 
 			if (labelObject != null)
 			{
-				labelObject.GetComponent<InputLabel>().BubbleImage.sprite = InputLabelPlain;
+				labelObject.GetComponent<InputLabel>().bubbleImage.sprite = inputLabelPlain;
 			}
 
-			valueObject.GetComponent<InputValue>().BubbleImage.sprite = InputValuePlain;
+			valueObject.GetComponent<InputValue>().bubbleImage.sprite = inputValuePlain;
 			
 			PMWrapper.ResolveYield(submitedText);
 		}

@@ -2,9 +2,9 @@
 using Mellis.Core.Interfaces;
 using UnityEngine;
 
-public class RandintFunction : ClrFunction
+public class RandomIntFunction : ClrFunction
 {
-	public RandintFunction() : base("randint")
+	public RandomIntFunction() : base("randint")
 	{
 	}
 

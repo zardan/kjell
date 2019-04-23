@@ -36,7 +36,7 @@ public class PrintFunction : ClrFunction
 			}
 		}
 
-		IOStream.Instance.Print(builder.ToString());
+		IOStream.instance.Print(builder.ToString());
 
 		return null;
 	}

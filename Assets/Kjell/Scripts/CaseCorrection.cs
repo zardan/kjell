@@ -34,7 +34,7 @@ public class CaseCorrection : MonoBehaviour, IPMCaseSwitched, IPMTimeToCorrectCa
 			else
 			{
 				string nextInput = inputs[inputIndex];
-				IOStream.Instance.StartCoroutine(inputValueObject.GetComponent<InputValue>().StartInputAnimation(nextInput));
+				IOStream.instance.StartCoroutine(inputValueObject.GetComponent<InputValue>().StartInputAnimation(nextInput));
 				inputIndex++;
 			}
 		}
@@ -59,7 +59,7 @@ public class CaseCorrection : MonoBehaviour, IPMCaseSwitched, IPMTimeToCorrectCa
 
 	private static string StringifyNumber(int number)
 	{
-		var First20 = new List<string>()
+		var first20 = new List<string>()
 		{
 			"första",
 			"andra",
@@ -101,7 +101,7 @@ public class CaseCorrection : MonoBehaviour, IPMCaseSwitched, IPMTimeToCorrectCa
 
 		if (number < 20)
 		{
-			return First20[number - 1];
+			return first20[number - 1];
 		}
 
 		if (number < 100)
@@ -112,7 +112,7 @@ public class CaseCorrection : MonoBehaviour, IPMCaseSwitched, IPMTimeToCorrectCa
 			}
 			else
 			{
-				return tensStart[number / 10 - 2] + First20[number % 10 - 1];
+				return tensStart[number / 10 - 2] + first20[number % 10 - 1];
 			}
 		}
 		else

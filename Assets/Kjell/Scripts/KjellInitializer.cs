@@ -9,7 +9,7 @@ public class KjellInitializer : MonoBehaviour
     {
         Main.RegisterFunction(new InputFunction());
         Main.RegisterFunction(new PrintFunction());
-        Main.RegisterFunction(new RandintFunction());
+        Main.RegisterFunction(new RandomIntFunction());
 
         Main.RegisterCaseDefinitionContract<KjellCaseDefinition>();
     }

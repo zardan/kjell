@@ -1,23 +1,26 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Kjell
 {
 	public class Container : MonoBehaviour
 	{
-		public RectTransform TextTransform;
-		public LayoutElement LayoutElement;
+		[FormerlySerializedAs("TextTransform")]
+		public RectTransform textTransform;
+		[FormerlySerializedAs("LayoutElement")]
+		public LayoutElement layoutElement;
 
 		// Something like this can be used to update live when user is writing
 		public void UpdateWidth()
 		{
-			if (TextTransform.rect.width >= 275)
+			if (textTransform.rect.width >= 275)
 			{
-				LayoutElement.preferredWidth = 300;
+				layoutElement.preferredWidth = 300;
 			}
-			else if (TextTransform.rect.width < 240)
+			else if (textTransform.rect.width < 240)
 			{
-				LayoutElement.preferredWidth = -1;
+				layoutElement.preferredWidth = -1;
 			}
 		}
 
@@ -25,7 +28,7 @@ namespace Kjell
 		{
 			if (length >= 50)
 			{
-				LayoutElement.preferredWidth = 300;
+				layoutElement.preferredWidth = 300;
 			}
 		}
 	}
