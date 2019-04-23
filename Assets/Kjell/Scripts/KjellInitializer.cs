@@ -12,7 +12,7 @@ namespace Kjell
 		{
 			Main.RegisterFunction(new InputFunction());
 			Main.RegisterFunction(new PrintFunction());
-			Main.RegisterFunction(new RandomIntFunction());
+			Main.RegisterFunction(new RandintFunction());
 
 			Main.RegisterCaseDefinitionContract<KjellCaseDefinition>();
 		}

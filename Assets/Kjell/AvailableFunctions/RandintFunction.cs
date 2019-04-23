@@ -4,9 +4,9 @@ using UnityEngine;
 
 namespace Kjell.AvailableFunctions
 {
-	public class RandomIntFunction : ClrFunction
+	public class RandintFunction : ClrFunction
 	{
-		public RandomIntFunction() : base("randint")
+		public RandintFunction() : base("randint")
 		{
 		}
 
