@@ -7,31 +7,22 @@ namespace Kjell
 {
 	public class InputValue : MonoBehaviour
 	{
-		private bool hasBeenSubmitted;
-		[FormerlySerializedAs("SubmittedText")]
-		public Text submittedText;
+		[FormerlySerializedAs("BubbleImage")]
+		public Image bubbleImage;
 
 		[FormerlySerializedAs("InputField")]
 		public InputField inputField;
 
 		[FormerlySerializedAs("InputFieldBase")]
 		public GameObject inputFieldBase;
+
 		[FormerlySerializedAs("SendButton")]
 		public GameObject sendButton;
 
-		[FormerlySerializedAs("BubbleImage")]
-		public Image bubbleImage;
+		[FormerlySerializedAs("SubmittedText")]
+		public Text submittedText;
 
-		private void Update()
-		{
-			if (Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetKeyDown(KeyCode.Return))
-			{
-				if(!hasBeenSubmitted)
-				{
-					SubmitInput();
-				}
-			}
-		}
+		bool hasBeenSubmitted;
 
 		public void SubmitInput()
 		{
@@ -43,13 +34,13 @@ namespace Kjell
 			}
 
 			inputFieldBase.SetActive(false);
-            sendButton.SetActive(false);
-            submittedText.gameObject.SetActive(true);
+			sendButton.SetActive(false);
+			submittedText.gameObject.SetActive(true);
 
 			GetComponent<Container>().SetWidth(inputField.text.Length);
 
-            IOStream.instance.InputSubmitted(submittedText.text);
-        }
+			IOStream.instance.InputSubmitted(submittedText.text);
+		}
 
 		public IEnumerator StartInputAnimation(string message)
 		{
@@ -77,7 +68,16 @@ namespace Kjell
 			sendButton.SetActive(false);
 			submittedText.gameObject.SetActive(true);
 		}
-    }
 
-    
+		void Update()
+		{
+			if (Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetKeyDown(KeyCode.Return))
+			{
+				if (!hasBeenSubmitted)
+				{
+					SubmitInput();
+				}
+			}
+		}
+	}
 }

@@ -8,15 +8,67 @@ namespace Kjell
 {
 	public class CaseCorrection : MonoBehaviour, IPMCaseSwitched, IPMTimeToCorrectCase, IPMCompilerStarted
 	{
+		static string errorMessage;
 		public static bool hasTestDefined;
 
-		private static int inputIndex;
-		private static int outputIndex;
+		static int inputIndex;
 
-		private static List<string> inputs;
-		private static List<string> outputs;
+		static List<string> inputs;
+		static int outputIndex;
+		static List<string> outputs;
 
-		private static string errorMessage;
+		public void OnPMCaseSwitched(int caseNumber)
+		{
+			Level currentLevel = PMWrapper.currentLevel;
+
+			if (currentLevel.cases != null &&
+			    caseNumber < currentLevel.cases.Count &&
+			    currentLevel.cases[caseNumber].caseDefinition != null &&
+			    ((KjellCaseDefinition)currentLevel.cases[caseNumber].caseDefinition).test != null)
+			{
+				var caseDefinition = (KjellCaseDefinition)currentLevel.cases[caseNumber].caseDefinition;
+
+				hasTestDefined = true;
+
+				inputIndex = 0;
+				inputs = caseDefinition.test.input;
+
+				outputIndex = 0;
+				outputs = caseDefinition.test.output;
+
+				if (outputs == null || outputs.Count == 0)
+				{
+					throw new InvalidOperationException("There is a test defined but no output defined.");
+				}
+			}
+			else
+			{
+				hasTestDefined = false;
+				inputs = null;
+				outputs = null;
+				inputIndex = 0;
+				outputIndex = 0;
+			}
+		}
+
+		public void OnPMCompilerStarted()
+		{
+			errorMessage = "";
+		}
+
+		public void OnPMTimeToCorrectCase()
+		{
+			CheckTooFewInputs();
+
+			if (!string.IsNullOrEmpty(errorMessage))
+			{
+				PMWrapper.RaiseTaskError(errorMessage);
+			}
+			else
+			{
+				PMWrapper.SetCaseCompleted();
+			}
+		}
 
 		public static IEnumerator NextInput(GameObject inputValueObject)
 		{
@@ -63,7 +115,7 @@ namespace Kjell
 			}
 		}
 
-		private static string StringifyNumber(int number)
+		static string StringifyNumber(int number)
 		{
 			var first20 = new List<string> {
 				"första",
@@ -121,7 +173,7 @@ namespace Kjell
 			return number.ToString();
 		}
 
-		private static void CheckTooFewInputs()
+		static void CheckTooFewInputs()
 		{
 			if (inputs != null && inputIndex < inputs.Count)
 			{
@@ -131,59 +183,6 @@ namespace Kjell
 			{
 				errorMessage = "För få utskrifter. Jag förväntade mig " + outputs.Count + " utskrifter.";
 			}
-		}
-
-		public void OnPMCaseSwitched(int caseNumber)
-		{
-			Level currentLevel = PMWrapper.currentLevel;
-
-			if (currentLevel.cases != null &&
-			    caseNumber < currentLevel.cases.Count &&
-			    currentLevel.cases[caseNumber].caseDefinition != null &&
-			    ((KjellCaseDefinition)currentLevel.cases[caseNumber].caseDefinition).test != null)
-			{
-				var caseDefinition = (KjellCaseDefinition)currentLevel.cases[caseNumber].caseDefinition;
-
-				hasTestDefined = true;
-
-				inputIndex = 0;
-				inputs = caseDefinition.test.input;
-
-				outputIndex = 0;
-				outputs = caseDefinition.test.output;
-
-				if (outputs == null || outputs.Count == 0)
-				{
-					throw new InvalidOperationException("There is a test defined but no output defined.");
-				}
-			}
-			else
-			{
-				hasTestDefined = false;
-				inputs = null;
-				outputs = null;
-				inputIndex = 0;
-				outputIndex = 0;
-			}
-		}
-
-		public void OnPMTimeToCorrectCase()
-		{
-			CheckTooFewInputs();
-
-			if (!string.IsNullOrEmpty(errorMessage))
-			{
-				PMWrapper.RaiseTaskError(errorMessage);
-			}
-			else
-			{
-				PMWrapper.SetCaseCompleted();
-			}
-		}
-
-		public void OnPMCompilerStarted()
-		{
-			errorMessage = "";
 		}
 	}
 }

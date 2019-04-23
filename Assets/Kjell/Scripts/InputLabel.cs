@@ -6,18 +6,18 @@ namespace Kjell
 {
 	public class InputLabel : MonoBehaviour
 	{
+		[FormerlySerializedAs("BubbleImage")]
+		public Image bubbleImage;
+
 		[FormerlySerializedAs("Text")]
 		public Text text;
-        [FormerlySerializedAs("BubbleImage")]
-        public Image bubbleImage;
-        
-        private void Start()
-        {
-            if (text.text == "")
-            {
-                Destroy(gameObject);
-            }
-        }
 
+		void Start()
+		{
+			if (text.text == "")
+			{
+				Destroy(gameObject);
+			}
+		}
 	}
 }

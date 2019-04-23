@@ -6,10 +6,11 @@ namespace Kjell
 {
 	public class Container : MonoBehaviour
 	{
-		[FormerlySerializedAs("TextTransform")]
-		public RectTransform textTransform;
 		[FormerlySerializedAs("LayoutElement")]
 		public LayoutElement layoutElement;
+
+		[FormerlySerializedAs("TextTransform")]
+		public RectTransform textTransform;
 
 		// Something like this can be used to update live when user is writing
 		public void UpdateWidth()
